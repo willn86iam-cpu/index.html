@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Mensurador de Regime Radiológico Will</title>
+    <style>
+        body { font-family: sans-serif; background-color: #0f2027; color: white; padding: 20px; text-align: center; }
+        .app-container { max-width: 600px; margin: 0 auto; }
+        .card { background: white; color: #333; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); text-align: left; margin-top: 20px; }
+        .grid-links { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
+        .btn-menu { display: block; background-color: #4ca1af; color: white; padding: 12px; border-radius: 6px; font-weight: bold; font-size: 0.9em; text-align: left; border: none; width: 100%; cursor: pointer; }
+        .btn-menu:hover { background-color: #2c3e50; }
+        .back-btn { display: block; text-align: center; background: #2c3e50; color: white; padding: 12px; border-radius: 6px; font-weight: bold; margin-top: 20px; border: none; width: 100%; cursor: pointer; }
+        .back-btn:hover { background-color: #4ca1af; }
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        th { background: #2c3e50; color: white; padding: 10px; text-align: left; }
+        td { padding: 10px; border-bottom: 1px solid #ddd; font-size: 0.95em; color: #333; }
+        .header-logo { max-width: 180px; height: auto; margin-bottom: 10px; background-color: white; padding: 10px; border-radius: 8px; display: inline-block; }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+      <div>
+            <img src="logo-will.png" alt="MENSURADOR DE REGIME RADIOLÓGICO WILL" class="header-logo" onerror="this.style.display='none';">
+        </div>
+        <h2>Jesus te ama!&nbsp;</h2>
+        <p style="margin-top: -10px; color: #4ca1af; font-weight: bold;">Tecnologia em Radiodiagnóstico</p>
+
+        <!-- TELA 1: MENU PRINCIPAL (DA CABEÇA AOS PÉS) -->
+        <div id="tela-menu" class="card">
+            <h3 style="color:#2c3e50; text-align:center; margin-top:0;">Manual de Posicionamento - Índice Geral</h3>
+            <p style="text-align:center; color:#666; font-size:0.9em;">Clique num segmento anatómico para abrir a Ficha Técnica:</p>
+            
+            <div class="grid-links">
+                <!-- Cabeça e Pescoço -->
+              <button class="btn-menu" onclick="abrirFicha('cranio')">1. Crânio</button>
+                <button class="btn-menu" onclick="abrirFicha('mastoides')">2. Mastóides</button>
+                <button class="btn-menu" onclick="abrirFicha('arcos')">3. Arcos Zigomáticos</button>
+                <button class="btn-menu" onclick="abrirFicha('forame')">4. Forame Óptico</button>
+                <button class="btn-menu" onclick="abrirFicha('mandibula')">5. Mandíbula</button>
+                <button class="btn-menu" onclick="abrirFicha('face')">6. Ossos Faciais</button>
+                <button class="btn-menu" onclick="abrirFicha('seios')">7. Seios Paranasais</button>
+                <button class="btn-menu" onclick="abrirFicha('cervical')">8. Coluna Cervical</button>
+                <!-- Tronco e Membros Superiores -->
+                <button class="btn-menu" onclick="abrirFicha('toracica')">9. Coluna Torácica</button>
+                <button class="btn-menu" onclick="abrirFicha('costelas')">10. Costelas</button>
+                <button class="btn-menu" onclick="abrirFicha('esterno')">11. Esterno</button>
+                <button class="btn-menu" onclick="abrirFicha('ec')">12. Artic. Esternoclaviculares</button>
+                <button class="btn-menu" onclick="abrirFicha('lombar')">13. Coluna Lombar</button>
+                <button class="btn-menu" onclick="abrirFicha('ombro_rotina')">14. Ombro (Sem Trauma)</button>
+                <button class="btn-menu" onclick="abrirFicha('ombro_trauma')">15. Ombro (Com Trauma)</button>
+                <button class="btn-menu" onclick="abrirFicha('ac')">16. Artic. Acrômioclaviculares</button>
+                <button class="btn-menu" onclick="abrirFicha('clavicula')">17. Clávicula</button>
+                <button class="btn-menu" onclick="abrirFicha('escapula')">18. Escápula</button>
+                <button class="btn-menu" onclick="abrirFicha('umero')">19. Úmero (Braço)</button>
+                <button class="btn-menu" onclick="abrirFicha('cotovelo')">20. Cotovelo</button>
+                <button class="btn-menu" onclick="abrirFicha('antebraço')">21. Antebraço</button>
+                <button class="btn-menu" onclick="abrirFicha('mao')">22. Mão e Punho</button>
+                <button class="btn-menu" onclick="abrirFicha('dedos_mao')">23. Dedos da Mão</button>
+                <!-- Membros Inferiores -->
+                <button class="btn-menu" onclick="abrirFicha('femur_prox')">24. Fêmur Proximal / Pelve</button>
+                <button class="btn-menu" onclick="abrirFicha('femur_dist')">25. Fêmur Média Distal</button>
+                <button class="btn-menu" onclick="abrirFicha('joelho')">26. Joelho e Fossa</button>
+                <button class="btn-menu" onclick="abrirFicha('tornozelo')">27. Tornozelo e Perna</button>
+                <button class="btn-menu" onclick="abrirFicha('dedos_pe')">28. Dedos do Pé</button>
+                <button class="btn-menu" onclick="abrirFicha('calcaneo')">29. Pé e Calcâneo</button>
+            </div>
+        </div>
+
+        <!-- TELA 2: FICHA TÉCNICA DINÂMICA -->
+        <div id="tela-ficha" class="card" style="display: none;">
+            <h3 id="ficha-titulo" style="color:#2c3e50; text-align:center; margin-top:0;"></h3>
+            
+            <table id="tabela-dados">
+                <!-- Conteúdo injetado via Javascript -->
+            </table>
+
+            <button class="back-btn" onclick="voltarMenu()">Voltar ao Menu Principal</button>
+        </div>
+    </div>
+
+    <script>
+        var bancoDados = {
+            cranio: {
+                titulo: "1. Segmento: Crânio",
+                linhas: [
+                    ["Incidência Clássica AP", "75 KV | 24 mAs | Foco Grosso | Grade: Sim | DFOFI: 1,00m"],
+                    ["Raio Central (RC)", "Perpendicular, saindo no Násio."],
+                    ["Método de Towne", "80 KV | 30 mAs | Ângulo caudal de 30° em direção à LOM."],
+                    ["Método de Caldwell", "75 KV | 24 mAs | Ângulo caudal de 15°, saindo no Násio."],
+                    ["Especial: Haas / SMV", "85 KV | 40 mAs | Perpendicular à LIOM entre os ângulos da mandíbula."]
+                ]
+            },
+            mastoides: {
+                titulo: "2. Segmento: Mastóides",
+                linhas: [
+                    ["Método de Law Modificado", "75 KV | 22 mAs | Foco Grosso | Grade: Sim | DFOFI: 1,00m"],
+                    ["Raio Central (RC)", "Angulação caudal de 15° e anterior de 15°, entrando 5 cm atrás do CAE."],
+                    ["Perfil Posterior Stenvers", "80 KV | 30 mAs | Rotação da cabeça a 45° em direção ao lado oposto."],
+                    ["Especial: Arcelin", "80 KV | 30 mAs | Stenvers invertido para decúbito dorsal."]
+                ]
+            },
+            arcos: {
+                titulo: "3. Segmento: Arcos Zigomáticos",
+                linhas: [
+                    ["Submento-vértice (SMV)", "85 KV | 40 mAs | Foco Grosso | Grade: Sim | DFOFI: 1,00m"],
+                    ["Raio Central (RC)", "Perpendicular à LIOM, centralizado 4 cm abaixo da sínfise."],
+                    ["Tangencial Oblíqua", "75 KV | 20 mAs | Inclinação da cabeça 15° para o lado de interesse."],
+                    ["Waters Modificado", "80 KV | 24 mAs | Linha mentomeatal perpendicular ao receptor."]
+                ]
+            },
+            forame: {
+                titulo: "4. Segmento: Forame Óptico",
+                linhas: [
+                    ["Método de Rhese", "80 KV | 30 mAs | Foco Grosso | Grade: Sim | DFOFI: 1,00m"],
+                    ["Raio Central (RC)", "Perpendicular, entrando na órbita voltada para baixo (Cabeça a 53°)."],
+                    ["Método de Waters", "80 KV | 24 mAs | Queixo estendido, órbita projetada acima dos rochedos."]
+                ]
+            },
+            mandibula: {
+                titulo: "5. Segmento: Mandíbula",
+                linhas: [
+                    ["PA de Mandíbula", "75 KV | 20 mAs | Foco Grosso | Grade: Sim | DFOFI: 1,00m"],
+                    ["Raio Central (RC)", "Perpendicular, saindo na região da junção dos lábios."],
+                    ["Axiolateral Oblíqua", "70 KV | 15 mAs | Cabeça inclinada a 30° em direção ao chassi."],
+                    ["Panorâmica (Panorex)", "70-80 KV | Automático por rotação do tubo da máquina."]
+                ]
+            },
+            face: {
+                titulo: "6. Segmento: Ossos Faciais / Nasais",
+                linhas: [
+                    ["Método de Waters", "80 KV | 24 mAs | Foco Grosso | Grade: Sim | DFOFI: 1,00m"],
+                    ["Raio Central (RC) Face", "Perpendicular, saindo diretamente no Acântio."],
+                    ["Perfil de Ossos Nasais", "55 KV | 4 mAs | Foco Fino | Sem Grade | DFOFI: 1,00m"],
+                    ["Raio Central (RC) Nasal", "Perpendicular, direcionado 2 cm abaixo do násio."]
+                ]
+            },
+            seios: {
+                titulo: "7. Segmento: Seios Paranasais",
+                linhas: [
+                    ["Método de Caldwell", "75 KV | 24 mAs | Foco Grosso | Grade: Sim | DFOFI: 1,00m"],
+                    ["Raio Central (RC)", "Horizontal e perpendicular, saindo no Násio (Paciente em ortostase)."],
+                    ["Waters Boca Aberta", "80 KV | 24 mAs | Diferencial para visualizar o seio esfenoidal."]
+                ]
+            },
+            cervical: {
+                titulo: "8. Segmento: Coluna Cervical",
+                linhas: [
+                    ["Transoral (C1-C2)", "75 KV | 20 mAs | Foco Fino | Grade: Sim | DFOFI: 1,00m"],
+
